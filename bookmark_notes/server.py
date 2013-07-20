@@ -1,6 +1,5 @@
 """Loopback-only HTTP server for a single user's local collection."""
 import argparse
-from functools import partial
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 import secrets
