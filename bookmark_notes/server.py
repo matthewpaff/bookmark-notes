@@ -37,8 +37,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self.allowed_host():
             return
-        route = urlsplit(self.path)
         try:
+            route = urlsplit(self.path)
             params = parse_qs(route.query, max_num_fields=20)
             if route.path in ("/static/app.css", "/static/app.js"):
                 mime = "text/css; charset=utf-8" if route.path.endswith(".css") else "text/javascript; charset=utf-8"
@@ -105,7 +105,7 @@ class Handler(BaseHTTPRequestHandler):
             self.respond(views.error_page("The local database could not be updated."), 500)
 
 
-def make_server(db_path, port=8765):
+def make_server(db_path, port=18765):
     # Database files are checked before accepting requests. Connections are short-lived.
     with BookmarkStore(db_path):
         pass
@@ -119,7 +119,7 @@ def make_server(db_path, port=8765):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Run a personal, local-only bookmark library.")
     parser.add_argument("--db", default=str(Path.home() / ".bookmark-notes" / "bookmarks.sqlite3"))
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=18765)
     args = parser.parse_args(argv)
     if not 1 <= args.port <= 65535:
         parser.error("Port must be between 1 and 65535")
