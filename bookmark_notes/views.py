@@ -18,7 +18,7 @@ def layout(title, content, sidebar=""):
 <script src="/static/app.js" defer></script></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar"><a class="brand" href="/"><span class="brand-icon" aria-hidden="true">b.</span>
-Bookmark Notes</a><span class="local-badge">YOUR LOCAL LIBRARY</span></header>
+Bookmark Notes</a><a href="/export" download="bookmarks.json">Export JSON</a><span class="local-badge">YOUR LOCAL LIBRARY</span></header>
 <div class="workspace"><aside class="sidebar"><p class="eyebrow">WORKSPACE</p>
 <a class="library-link" href="/">All bookmarks <span aria-hidden="true">↗</span></a>
 {sidebar}<div class="sidebar-note">A small place for useful things.<br>Saved on this computer.</div></aside>

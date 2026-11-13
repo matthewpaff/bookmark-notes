@@ -102,6 +102,10 @@ class BookmarkStore:
             FROM tags JOIN bookmark_tags ON tags.id=bookmark_tags.tag_id
             GROUP BY tags.id ORDER BY tags.name""")]
 
+    def export(self):
+        rows = self.db.execute("SELECT * FROM bookmarks ORDER BY id")
+        return {"schema": "bookmark-notes.export.v1", "bookmarks": [self._with_tags(row) for row in rows]}
+
     def find(self, query="", tag="", page=1, page_size=12):
         if page < 1 or not 1 <= page_size <= 100:
             raise ValueError("Invalid page or page size")

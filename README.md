@@ -28,6 +28,8 @@ Help does not create a database. An invalid or occupied port reports an error.
 
 ## Use
 
+Choose **Export JSON** to download the entire library, including titles, URLs, notes, tags, IDs, and saved timestamps. Exports use the versioned `bookmark-notes.export.v1` schema and UTF-8, independent of the current search or page. Empty libraries export an empty `bookmarks` array. This is a portable data export; automatic importing or restoration is not implemented. The export stays on your computer and does not change saved bookmarks.
+
 1. Select **Add bookmark**, enter a title and an HTTP/HTTPS URL, and save.
 2. Add optional notes and comma-separated tags such as `python, reference`.
 3. Search the title, URL, or notes. Select a tag to combine it with search.
