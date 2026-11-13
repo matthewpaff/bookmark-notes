@@ -1,5 +1,6 @@
 """Loopback-only HTTP server for a single user's local collection."""
 import argparse
+import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 import secrets
@@ -45,7 +46,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.respond((STATIC / route.path.rsplit("/", 1)[1]).read_bytes(), content_type=mime)
                 return
             with BookmarkStore(self.server.db_path) as store:
-                if route.path == "/":
+                if route.path == "/export":
+                    self.respond(json.dumps(store.export(), ensure_ascii=False, indent=2) + "\n",
+                                 content_type="application/json; charset=utf-8")
+                elif route.path == "/":
                     query, tag = params.get("q", [""])[0], params.get("tag", [""])[0]
                     if len(query) > 200 or len(tag) > 30:
                         raise ValueError("Search or tag is too long")
